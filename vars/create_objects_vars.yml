@@ -1,0 +1,18 @@
+---
+# General
+organization_name: "FTS Mainframe"
+
+# Credential
+credential_name: "zvmrestart"
+
+# Project
+scm_url: "https://gitlab.onefiserv.net/zeng/aap/zeng-aap-zvmrestart"
+scm_branch: ""
+project_name: "zvmrestart"
+
+# Inventory
+inventory_file_name: "inventory.yaml"
+
+# Job templates
+job_template_name: "zvmrestart"
+playbook_file_name: "node-start-stop.yml"

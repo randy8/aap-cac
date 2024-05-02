@@ -1,0 +1,31 @@
+---
+- name: Check if credential exists
+  ansible.controller.export:
+    # Default
+    controller_host: "{{ controller_hostname }}"
+    controller_username: "{{ controller_username }}"
+    controller_password: "{{ controller_password }}"
+    validate_certs: "{{ controller_validate_certs }}"
+    # CHANGEME
+    credentials: "{{ credential_name }}"
+  register: get_creds
+
+- debug:
+    var: get_creds
+
+- name: Create project
+  ansible.controller.project:
+    # Default
+    controller_host: "{{ controller_hostname }}"
+    controller_username: "{{ controller_username }}"
+    controller_password: "{{ controller_password }}"
+    validate_certs: "{{ controller_validate_certs }}"
+    # CHANGEME
+    name: "{{ project_name }}"
+    organization: "{{ organization_name }}"
+    scm_url: "{{ scm_url}}"
+    scm_type: git
+    scm_branch: "{{ scm_branch }}"
+    scm_credential: "{{ credential_name }}"
+    scm_update_on_launch: true
+  when: get_creds.assets.credentials[0] | length > 0

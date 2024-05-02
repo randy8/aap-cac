@@ -1,0 +1,47 @@
+---
+- name: Verify if the project exists
+  ansible.controller.export:
+    # Default
+    controller_host: "{{ controller_hostname }}"
+    controller_username: "{{ controller_username }}"
+    controller_password: "{{ controller_password }}"
+    validate_certs: "{{ controller_validate_certs }}"
+    # CHANGEME
+    projects: "{{ project_name }}"
+  register: get_proj
+
+- debug:
+    var: get_proj
+
+- name: Create inventory and inventory source if project exists
+  block:
+    - name: Create inventory
+      ansible.controller.inventory:
+        # Default
+        controller_host: "{{ controller_hostname }}"
+        controller_username: "{{ controller_username }}"
+        controller_password: "{{ controller_password }}"
+        validate_certs: "{{ controller_validate_certs }}"
+        # CHANGEME
+        description: "Inventory for {{ project_name }}"
+        name: "{{ project_name }}-inventory"
+        organization: "{{ organization_name }}"
+
+    - name: Add an inventory source
+      ansible.controller.inventory_source:
+        # Default
+        controller_host: "{{ controller_hostname }}"
+        controller_username: "{{ controller_username }}"
+        controller_password: "{{ controller_password }}"
+        validate_certs: "{{ controller_validate_certs }}"
+        # CHANGEME
+        description: "Inventory source for {{ project_name }}"
+        inventory: "{{ project_name }}-inventory"
+        name: "{{ project_name }}-inventory-source"
+        organization: "{{ organization_name }}"
+        overwrite: true
+        source: scm
+        source_path: "{{ inventory_file_name }}"
+        source_project: "{{ project_name }}"
+        update_on_launch: true
+  when: get_proj.assets.projects[0] | length > 0

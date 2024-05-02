@@ -1,0 +1,14 @@
+---
+# tasks file for create_objects
+
+- name: Create credentials
+  include_tasks: create_credentials.yml
+  
+- name: Create project
+  include_tasks: create_projects.yml
+
+- name: Create inventories
+  include_tasks: create_inventories.yml
+
+- name: Create job template
+  include_tasks: create_job_templates.yml

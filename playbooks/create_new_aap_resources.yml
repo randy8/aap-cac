@@ -1,0 +1,15 @@
+---
+- name: Create resources needed to run an AAP job
+  hosts: localhost
+  vars:
+    controller_username: "{{ vault_controller_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
+    controller_password: "{{ vault_controller_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
+    controller_hostname: "{{ vault_controller_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
+    controller_validate_certs: "{{ vault_controller_validate_certs | default(lookup('env', 'CONTROLLER_VERIFY_SSL')) }}"
+
+  vars_files:
+    - "../vars/create_objects_vars.yml"
+    - "../vars/git_cred.yml"
+    - "../vars/export_credentials.yml" 
+  roles:
+    - ../roles/create_new_aap_resources
