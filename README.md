@@ -1,6 +1,5 @@
-# tenant-template
 1. Clone repo
-git clone https://gitlab.onefiserv.net/zeng/aap/tenant-template.git
+git clone https://github.com/randy8/aap-cac.git
 
 2. Create GitLab project access token - maintainer with read rights
 
@@ -18,10 +17,3 @@ $ vim ${MY_PROJECT_NAME}_vars.yml
 # Vault the vars file
 $ ansible-vault encrypt ${MY_PROJECT_NAME}_vars.yml
 New Vault password: [enter password]
- 
-# Add the line to GitLab CI script to onboard the project into AAP
-$ cd ..
-$ echo "ansible-playbook playbooks/create_new_aap_resources.yml --vault-password-file=\$1 -e @vars/${MY_PROJECT_NAME}_vars.yml -e @vars/aap_admin_vars.yml" >> onboard_projects.sh
-```
-
-4. Push changes to kick off the GitLab CI that creates projects and exports the resources to this repo
