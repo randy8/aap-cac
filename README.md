@@ -1,43 +1,27 @@
-# Commands to run:
+# tenant-template
+1. Clone repo
+git clone https://gitlab.onefiserv.net/zeng/aap/tenant-template.git
 
-## Install necessary collections (from top level directory)
-ansible-galaxy install -r collections/requirements.yml
+2. Create GitLab project access token - maintainer with read rights
 
-## Export AAP configs and flatten output from source cluster
+3. Fill out vars file, adding the previous step's Git token to `gitlab_credentials.inputs.token` and any `vaulted_credentials.inputs.*path*`
 ```
-ansible-playbook export.yml -e controller_configuration_filetree_read_secure_logging=false -e @../vars/export_credentials.yml --ask-vault-pass
-ansible-playbook clean_export.yml -e controller_configuration_secure_logging=false -e @../vars/export_credentials.yml --ask-vault-pass
+# Set project name
+# Check to see that the execution environment exists within your target AAP instance
+$ MY_PROJECT_NAME=""
+$ cd vars
+$ cp project_name_vars.yml ${MY_PROJECT_NAME}_vars.yml
+ 
+# Update the values
+$ vim ${MY_PROJECT_NAME}_vars.yml
+ 
+# Vault the vars file
+$ ansible-vault encrypt ${MY_PROJECT_NAME}_vars.yml
+New Vault password: [enter password]
+ 
+# Add the line to GitLab CI script to onboard the project into AAP
+$ cd ..
+$ echo "ansible-playbook playbooks/create_new_aap_resources.yml --vault-password-file=\$1 -e @vars/${MY_PROJECT_NAME}_vars.yml -e @vars/aap_admin_vars.yml" >> onboard_projects.sh
 ```
 
-## Import AAP configs into destination cluster (source can also be the destination to create new objects)
-```
-ansible-playbook import.yml -e controller_configuration_filetree_read_secure_logging=false -e @../vars/import_credentials.yml --ask-vault-pass
-```
-
-## Creating resources via playbook
-```
----
-- name: Create a job template
-  hosts: localhost
-  connection: local
-  gather_facts: false
-  vars:
-    controller_username: "{{ vault_controller_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
-    controller_password: "{{ vault_controller_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
-    controller_hostname: "{{ vault_controller_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
-    controller_validate_certs: "{{ vault_controller_validate_certs | default(lookup('env', 'CONTROLLER_VERIFY_SSL')) }}" 
-  tasks:
-    - name: Create a job template
-      ansible.controller.job_template:
-        controller_host: "{{ controller_hostname }}"
-        controller_username: "{{ controller_username }}"
-        controller_password: "{{ controller_password }}"
-        validate_certs: "{{ controller_validate_certs }}"
-```
-The following variables must be set in order for the module to communicate with the API. This pattern will be consistent with other object types.
-Any future changes can be made in `filetree_output_flatten/`.
-
-## From the playbooks/ directory
-```
-ansible-playbook ./example_playbooks/create_job_template.yml -e @../vars/export_credentials.yml --ask-vault-pass
-```
+4. Push changes to kick off the GitLab CI that creates projects and exports the resources to this repo

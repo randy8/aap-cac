@@ -1,0 +1,46 @@
+---
+# Usage: 
+# 1. Update *all empty string fields* per project repo
+# 2. Add the vars file to `onboard_project.sh` 
+#    (i.e. ansible-playbook playbooks/create_new_aap_resources.yml --vault-password-file=$1 -e @<project_name>_vars.yml -e @aap_admin_vars.yml)
+
+## General
+organization_name: "z/OS Mainframe"
+
+## Project
+# Git repo (don't include ".git")
+scm_url: ""
+# Git branch can be left blank if there is only one branch
+scm_branch: ""
+# Can override but Git repo name will be the default project name
+project_name: "{{ scm_url.split('/')[-1] }}"
+
+## Credential
+git_credentials:
+  - name: "{{ project_name }}"
+    inputs:
+      token: ""
+
+## Non-Git credentials
+vault_credentials:
+  - type: Machine
+    name: "{{ project_name }}-ssh-key"
+    inputs: 
+      ssh_key_data: "" # SSH private key
+  - type: Vault
+    name: "{{ project_name }}-vault-pass"
+    inputs: 
+      password: "" # vault password
+
+## Inventory
+inventory_file_path: ""
+
+## Job templates
+# Pass in one or more playbooks as a list
+playbook_file_paths: 
+  - ""
+
+# Default is Control Plane Execution Environment if unset
+# Z-related EE: "PAH - IBM Management Execution Environment"
+execution_environment: ""
+

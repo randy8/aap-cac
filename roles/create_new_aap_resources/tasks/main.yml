@@ -1,14 +1,22 @@
 ---
-# tasks file for create_objects
-
+# tasks file for create_new_aap_resources
 - name: Create credentials
   include_tasks: create_credentials.yml
   
-- name: Create project
-  include_tasks: create_projects.yml
-
+- name: Create projects
+  include_tasks: 
+    file: create_projects.yml
+    apply:
+      tags: projects
+  tags: projects
+  
 - name: Create inventories
   include_tasks: create_inventories.yml
 
-- name: Create job template
-  include_tasks: create_job_templates.yml
+- name: Create job templates
+  include_tasks: 
+    file: create_job_templates.yml
+    apply:
+      tags: job_templates
+  tags: job_templates
+

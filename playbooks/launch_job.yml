@@ -1,0 +1,80 @@
+---
+- name: Launch a job
+  hosts: localhost
+  vars:
+    controller_username: "{{ vault_controller_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
+    controller_password: "{{ vault_controller_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
+    controller_hostname: "{{ vault_controller_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
+    controller_validate_certs: "{{ vault_controller_validate_certs | default(lookup('env', 'CONTROLLER_VERIFY_SSL')) }}"  
+    # Update for each run
+    extra_vars:
+      app_deployment_area: ILLOC
+      app_version: 1.0.21
+      app_name: ilocc-processor
+      env: cat
+
+  tasks:
+    - set_fact:
+        job_list: []
+
+    - set_fact:
+        job_list: "{{ job_list + [job_name] }}"
+      loop: "{{ playbook_file_paths }}"
+      loop_control:
+        loop_var: playbook_path
+      vars:
+        job_name: "{{ project_name }} - {{ playbook_path | basename | regex_replace('(\\.yaml|\\.yml)$', '') }}"
+
+    - debug:
+        var: job_list
+
+    - name: Set Machine and Vault credential facts
+      ansible.builtin.set_fact:
+        ssh_key_path: >-
+          {{
+            vault_credentials
+            | selectattr('inputs.ssh_key_data', 'defined')
+            | rejectattr('inputs.ssh_key_data', 'eq', "")
+            | map(attribute='name')
+            | list
+          }}
+        vault_pass: >-
+          {{
+            vault_credentials
+            | selectattr('inputs.password', 'defined')
+            | rejectattr('inputs.password', 'eq', "")
+            | map(attribute='name')
+            | list
+          }}
+
+    - name: Create a list of credential_names if they are defined
+      ansible.builtin.set_fact:
+        credential_names: "{{ credential_names | default([]) + item }}"
+      loop: "{{ [ssh_key_path, vault_pass] }}"
+      when: item | length > 0
+
+    - name: Create job template(s)
+      ansible.controller.job_template:
+        controller_host: "{{ controller_hostname }}"
+        controller_username: "{{ controller_username }}"
+        controller_password: "{{ controller_password }}"
+        validate_certs: "{{ controller_validate_certs }}"
+        credentials: "{{ credential_names | default([]) }}"
+        description: "Job template for {{ project_name }} running {{ playbook_file_paths[1] | basename }}"
+        execution_environment: "{{ execution_environment | default('Control Plane Execution Environment') }}"
+        inventory: "{{ project_name }}-inventory"
+        job_type: run
+        name: "{{ job_list[1] }}" # update index
+        organization: "{{ organization_name }}"
+        playbook: "{{ playbook_file_paths[1] }}"
+        project: "{{ project_name }}"
+        extra_vars: "{{ extra_vars | default({}) }}"
+
+        
+    - name: Launch a job
+      ansible.controller.job_launch:
+        controller_host: "{{ controller_hostname }}"
+        controller_username: "{{ controller_username }}"
+        controller_password: "{{ controller_password }}"
+        validate_certs: "{{ controller_validate_certs }}"
+        job_template: "{{ job_list[1] }}" # update index

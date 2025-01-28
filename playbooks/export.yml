@@ -7,7 +7,7 @@
     controller_password: "{{ vault_controller_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
     controller_hostname: "{{ vault_controller_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
     controller_validate_certs: "{{ vault_controller_validate_certs | default(lookup('env', 'CONTROLLER_VERIFY_SSL')) }}"
-    output_path: "../aap-configs/filetree_output"
+    output_path: "../aap-configs/{{ controller_hostname }}/filetree_output"
 
   pre_tasks:
     - name: "Setup authentication (block)"

@@ -7,9 +7,38 @@
     controller_hostname: "{{ vault_controller_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
     controller_validate_certs: "{{ vault_controller_validate_certs | default(lookup('env', 'CONTROLLER_VERIFY_SSL')) }}"
 
-  vars_files:
-    - "../vars/create_objects_vars.yml"
-    - "../vars/git_cred.yml"
-    - "../vars/export_credentials.yml" 
-  roles:
-    - ../roles/create_new_aap_resources
+  tasks:
+    - name: Set Machine and Vault credential facts
+      ansible.builtin.set_fact:
+        ssh_key_path: >-
+          {{
+            vault_credentials
+            | selectattr('inputs.ssh_key_data', 'defined')
+            | rejectattr('inputs.ssh_key_data', 'eq', "")
+            | map(attribute='name')
+            | list
+          }}
+        vault_pass: >-
+          {{
+            vault_credentials
+            | selectattr('inputs.password', 'defined')
+            | rejectattr('inputs.password', 'eq', "")
+            | map(attribute='name')
+            | list
+          }}
+    
+    - name: Create a list of credential_names if they are defined
+      ansible.builtin.set_fact:
+        credential_names: "{{ credential_names | default([]) + item }}"
+      loop: "{{ [ssh_key_path, vault_pass] }}"
+      when: item | length > 0
+    
+    - name: Call create_vaults role if there are any non-Git credentials to be added
+      include_role:
+        name: ../roles/create_vaults
+      when: credential_names is defined and credential_names | length > 0
+  
+    - name: Call create_new_aap_resources role
+      include_role:
+        name: ../roles/create_new_aap_resources
+

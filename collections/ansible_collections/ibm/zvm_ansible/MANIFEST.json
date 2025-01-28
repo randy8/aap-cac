@@ -1,0 +1,35 @@
+{
+ "collection_info": {
+  "namespace": "ibm",
+  "name": "zvm_ansible",
+  "version": "0.0.2",
+  "authors": [
+   "Jay Brenneman <rjbrenn@us.ibm.com>"
+  ],
+  "readme": "README.md",
+  "tags": [
+   "ibm",
+   "infrastructure",
+   "z",
+   "z_vm"
+  ],
+  "description": "a collection of modules for managing IBM z/VM via SMAPI through a Linux virtual machine running Feilong",
+  "license": [
+   "Apache-2.0"
+  ],
+  "license_file": null,
+  "dependencies": {},
+  "repository": "http://example.com/repository",
+  "documentation": "http://docs.example.com",
+  "homepage": "http://example.com",
+  "issues": "http://example.com/issue/tracker"
+ },
+ "file_manifest_file": {
+  "name": "FILES.json",
+  "ftype": "file",
+  "chksum_type": "sha256",
+  "chksum_sha256": "14f777c53d164b724ef0105cf575530d2c89631c1b9d28f9ada415f0a9d84230",
+  "format": 1
+ },
+ "format": 1
+}

@@ -1,0 +1,26 @@
+---
+- name: Launch a job
+  hosts: localhost
+  vars:
+    controller_username: "{{ vault_controller_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
+    controller_password: "{{ vault_controller_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
+    controller_hostname: "{{ vault_controller_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
+    controller_validate_certs: "{{ vault_controller_validate_certs | default(lookup('env', 'CONTROLLER_VERIFY_SSL')) }}"  
+  vars_files:
+    - "../vars/aap_vars.yml"
+    #- "../vars/git_cred.yml"
+    #- "../vars/export_credentials.yml"
+    - "../vars/import_credentials.yml"
+
+  tasks:
+    - name: Set job_template_name
+      ansible.builtin.set_fact:
+        job_template_name: "{{ project_name }} - {{ playbook_file_path | basename | regex_replace('(\\.yaml|\\.yml)$', '') }}"
+
+    - name: Launch a job
+      ansible.controller.job_launch:
+        controller_host: "{{ controller_hostname }}"
+        controller_username: "{{ controller_username }}"
+        controller_password: "{{ controller_password }}"
+        validate_certs: "{{ controller_validate_certs }}"
+        job_template: "{{ job_template_name }}"

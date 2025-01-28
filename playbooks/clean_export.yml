@@ -4,7 +4,11 @@
   connection: local
   gather_facts: false
   vars:
-    filetree_create_output_dir: "../aap-configs/filetree_output"
+    controller_username: "{{ vault_controller_username | default(lookup('env', 'CONTROLLER_USERNAME')) }}"
+    controller_password: "{{ vault_controller_password | default(lookup('env', 'CONTROLLER_PASSWORD')) }}"
+    controller_hostname: "{{ vault_controller_hostname | default(lookup('env', 'CONTROLLER_HOST')) }}"
+    controller_validate_certs: "{{ vault_controller_validate_certs | default(lookup('env', 'CONTROLLER_VERIFY_SSL')) }}" 
+    filetree_create_output_dir: "../aap-configs/{{ controller_hostname }}/filetree_output"
     filetree_controller_settings: &filetree_create_output_dir "{{ filetree_create_output_dir }}"
     filetree_controller_organizations: *filetree_create_output_dir
     filetree_controller_labels: *filetree_create_output_dir
@@ -64,8 +68,8 @@
         value: "{{ controller_inventories }}"
       - name: controller_inventory_sources
         value: "{{ controller_inventory_sources }}"
-        #- name: controller_instance_groups
-        #value: "{{ controller_instance_groups }}"
+      - name: controller_instance_groups
+        value: "{{ controller_instance_groups }}"
       - name: controller_hosts
         value: "{{ controller_hosts }}"
       - name: controller_groups

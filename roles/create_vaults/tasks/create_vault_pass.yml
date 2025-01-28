@@ -1,0 +1,17 @@
+---
+- name: Create Vault password credentials
+  ansible.controller.credential:
+    controller_host: "{{ controller_hostname }}"
+    controller_username: "{{ controller_username }}"
+    controller_password: "{{ controller_password }}"
+    validate_certs: "{{ controller_validate_certs }}"
+    name: "{{ item.name }}"
+    credential_type: Vault
+    organization: "{{ organization_name }}"
+    description: "Vault password"
+    inputs:
+      vault_password: "{{ item.inputs.password }}"
+  loop: "{{ vault_credentials }}"
+  when: item.type == "Vault" and item.inputs.password | length > 0
+  no_log: true
+          

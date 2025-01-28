@@ -1,0 +1,7 @@
+---
+# tasks file for create_vaults
+- name: Create machine credentials
+  include_tasks: create_machine_credentials.yml
+
+- name: Create Vault credentials
+  include_tasks: create_vault_pass.yml

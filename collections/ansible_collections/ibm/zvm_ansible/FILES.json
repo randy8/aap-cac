@@ -1,0 +1,257 @@
+{
+ "files": [
+  {
+   "name": ".",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": ".github",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": ".github/dco.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "51a5bbd190eadde23d129483c0832d1106d10ee7fa72839b186f148c0661d6e7",
+   "format": 1
+  },
+  {
+   "name": ".github/workflows",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": ".github/workflows/sanity-check.yaml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "2f653e78328b4ba69bec9f8096bdd53d2d6c6a7ae6f22bf4387925f0ab3a1c82",
+   "format": 1
+  },
+  {
+   "name": ".travis.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "54ffcb79bd3e4f48ab40472b81d655f7e84fc8d2b7216fff4d53868f03710519",
+   "format": 1
+  },
+  {
+   "name": "CHANGELOG.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "de3875eb3f339021aea81de3b0def55b8ed0b98555d94dd3dbc13f02836dca8d",
+   "format": 1
+  },
+  {
+   "name": "CODE_OF_CONDUCT.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "8d861322ec08cdd95b604dc757365e609020e52f8b149a09610edd668a7700df",
+   "format": 1
+  },
+  {
+   "name": "CONTRIBUTING.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a4e48a9a3d4e39967356ed6736cc7a6a979d84178c018d64979cbdb6eadea9bd",
+   "format": 1
+  },
+  {
+   "name": "LICENSE",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c6596eb7be8581c18be736c846fb9173b69eccf6ef94c5135893ec56bd92ba08",
+   "format": 1
+  },
+  {
+   "name": "MAINTAINERS.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "63480b59de7d3de3a7817facdded7fd652ee26f39d4a4582e5f20f6ed8cf789e",
+   "format": 1
+  },
+  {
+   "name": "README.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b64844bf898ac3fa6a3c94a3a022a9f97f1a72b0827282c3f8baa402039f25d0",
+   "format": 1
+  },
+  {
+   "name": "SECURITY.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "0cc923e7060658e6a3fc47782ba69c2c4777dfc48ccf53cc068b2f86b322ca12",
+   "format": 1
+  },
+  {
+   "name": "meta",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "meta/runtime.yml",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c03f11d23823bc02cb96a7d367906c9dab8fa9aeba23be4ba0263018359130e5",
+   "format": 1
+  },
+  {
+   "name": "plugins",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/README.md",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "854081319843a15a95afeee3d0d6f5a17bd7f57ec0ad89e6c96e1481d4e8f64a",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/zvm_clone_disk.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "5c505255dec81ab698658c6ebfe59c29001d83e6de9d4e90dff1ad6914e17ddb",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/zvm_dedicate_dev.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "a0c81832dacf8d1df946d9989b1a8a8dd82173da04e16695c533a843e5a1cb61",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/zvm_fileto_rdr.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "6a44fcf9ab89ac5ba99cddfd8bf96ae99816423d82ced51277918c08c8811485",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/zvm_minidisk.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "b12f9a2bc79ba6b395abf0cf4d75a3c0b8a7f2a18a95b757c1fd028bf2e5daa2",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/zvm_reader_empty.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "919c85a72bed4cec6152281bfccdcf7ab89281052f2a189c6dd838e5be282b9e",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/zvm_startstop_user.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "048b670446b396db0e52355ff0a4f19bc8cdc9f757c070080c8fca58907ee5c8",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/zvm_update_user.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "c0ae4af73f341a9189e4170014b9b40e20f1f407ab371d82141200d1e141e2fb",
+   "format": 1
+  },
+  {
+   "name": "plugins/modules/zvm_user.py",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "1c2222d12365c41fea1d7a77579616f65d742c7e424884271057a9247384ef88",
+   "format": 1
+  },
+  {
+   "name": "tests",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/sanity",
+   "ftype": "dir",
+   "chksum_type": null,
+   "chksum_sha256": null,
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.10.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "83e09c7ae31da96ceb708be99efabf3ae92313e70c26129c54a623aeb58f9ba2",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.11.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "83e09c7ae31da96ceb708be99efabf3ae92313e70c26129c54a623aeb58f9ba2",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.12.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "83e09c7ae31da96ceb708be99efabf3ae92313e70c26129c54a623aeb58f9ba2",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.13.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "83e09c7ae31da96ceb708be99efabf3ae92313e70c26129c54a623aeb58f9ba2",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.14.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "83e09c7ae31da96ceb708be99efabf3ae92313e70c26129c54a623aeb58f9ba2",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.15.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "83e09c7ae31da96ceb708be99efabf3ae92313e70c26129c54a623aeb58f9ba2",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.16.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "763e6c35cc787fe783851b24889be090508c60a35d7ba805c9a412678c194a7a",
+   "format": 1
+  },
+  {
+   "name": "tests/sanity/ignore-2.9.txt",
+   "ftype": "file",
+   "chksum_type": "sha256",
+   "chksum_sha256": "83e09c7ae31da96ceb708be99efabf3ae92313e70c26129c54a623aeb58f9ba2",
+   "format": 1
+  }
+ ],
+ "format": 1
+}

@@ -1,18 +1,4 @@
 ---
-- name: Verify if the project exists
-  ansible.controller.export:
-    # Default
-    controller_host: "{{ controller_hostname }}"
-    controller_username: "{{ controller_username }}"
-    controller_password: "{{ controller_password }}"
-    validate_certs: "{{ controller_validate_certs }}"
-    # CHANGEME
-    projects: "{{ project_name }}"
-  register: get_proj
-
-- debug:
-    var: get_proj
-
 - name: Create inventory and inventory source if project exists
   block:
     - name: Create inventory
@@ -41,7 +27,7 @@
         organization: "{{ organization_name }}"
         overwrite: true
         source: scm
-        source_path: "{{ inventory_file_name }}"
+        source_path: "{{ inventory_file_path }}"
         source_project: "{{ project_name }}"
         update_on_launch: true
-  when: get_proj.assets.projects[0] | length > 0
+#  when: get_proj.assets.projects[0] | length > 0
