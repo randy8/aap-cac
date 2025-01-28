@@ -1,9 +1,6 @@
-1. Clone repo
-git clone https://github.com/randy8/aap-cac.git
+1. Create Git project access token - maintainer with read rights
 
-2. Create GitLab project access token - maintainer with read rights
-
-3. Fill out vars file, adding the previous step's Git token to `gitlab_credentials.inputs.token` and any `vaulted_credentials.inputs.*path*`
+2. Fill out vars file, adding the previous step's Git token to `gitlab_credentials.inputs.token` and any `vaulted_credentials.inputs.*path*`
 ```
 # Set project name
 # Check to see that the execution environment exists within your target AAP instance
